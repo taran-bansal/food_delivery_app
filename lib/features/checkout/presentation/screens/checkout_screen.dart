@@ -47,6 +47,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final total = totalAmount + deliveryFee;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA), // Light gray background
       appBar: AppBar(
         title: const Text('Checkout'),
         centerTitle: true,
@@ -93,7 +94,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.white, // Card background remains pure white
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
@@ -159,20 +160,25 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8.h, left: 4.w),
-      child: CustomText(
+      padding: EdgeInsets.symmetric(vertical: 8.0.h),
+      child: Text(
         title,
-        fontSize: 18.sp,
-        fontWeight: FontWeight.bold,
+        style: TextStyle(
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w600,
+          color: Colors.black87,
+        ),
       ),
     );
   }
 
   Widget _buildAddressCard() {
     return Card(
-      elevation: 2,
+      elevation: 0,
+      color: Colors.white, // Card background remains pure white
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
+        side: BorderSide(color: Colors.grey.shade200, width: 1),
       ),
       child: Padding(
         padding: EdgeInsets.all(16.w),
@@ -239,9 +245,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   Widget _buildPaymentMethods() {
     return Card(
-      elevation: 2,
+      elevation: 0,
+      color: Colors.white, // Card background remains pure white
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
+        side: BorderSide(color: Colors.grey.shade200, width: 1),
       ),
       child: ListView.separated(
         shrinkWrap: true,
@@ -270,55 +278,41 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     required VoidCallback onTap,
   }) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       leading: Container(
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
-          color: isSelected
-              ? AppTheme.primaryColor.withOpacity(0.1)
-              : Colors.grey[100],
-          shape: BoxShape.circle,
+          color: isSelected ? AppTheme.primaryColor.withOpacity(0.1) : Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(8.r),
         ),
-        child: Icon(
-          icon,
-          color: isSelected ? AppTheme.primaryColor : Colors.grey[600],
-          size: 22.sp,
+        child: Icon(icon, 
+          color: isSelected ? AppTheme.primaryColor : Colors.grey[700],
+          size: 24.w,
         ),
       ),
-      title: CustomText(
+      title: Text(
         title,
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
-      ),
-      subtitle: CustomText(
-        subtitle,
-        fontSize: 13.sp,
-        color: Colors.grey[600],
-      ),
-      trailing: Container(
-        width: 24.w,
-        height: 24.w,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: isSelected ? AppTheme.primaryColor : Colors.grey[400]!,
-            width: 2,
-          ),
+        style: TextStyle(
+          fontSize: 15.sp,
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+          color: isSelected ? AppTheme.primaryColor : Colors.black87,
         ),
-        child: isSelected
-            ? Center(
-                child: Container(
-                  width: 14.w,
-                  height: 14.w,
-                  decoration: BoxDecoration(
-                    color: AppTheme.primaryColor,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              )
-            : null,
       ),
+      subtitle: Text(
+        subtitle,
+        style: TextStyle(
+          fontSize: 12.sp,
+          color: isSelected ? AppTheme.primaryColor.withOpacity(0.8) : Colors.grey[600],
+        ),
+      ),
+      trailing: isSelected
+          ? Icon(Icons.check_circle, color: AppTheme.primaryColor, size: 24.w)
+          : null,
       onTap: onTap,
+      tileColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
     );
   }
 
@@ -329,9 +323,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     double total,
   ) {
     return Card(
-      elevation: 2,
+      elevation: 0,
+      color: Colors.white, // Card background remains pure white
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
+        side: BorderSide(color: Colors.grey.shade200, width: 1),
       ),
       child: Padding(
         padding: EdgeInsets.all(16.w),
