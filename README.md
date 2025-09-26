@@ -52,9 +52,9 @@ A modern, responsive food delivery application built with Flutter. This app allo
 
 ## 📱 Screenshots
 
-| Home Screen | Menu | Cart | Checkout |
-|-------------|------|------|----------|
-| ![Home](screenshots/home.png) | ![Menu](screenshots/menu.png) | ![Cart](screenshots/cart.png) | ![Checkout](screenshots/checkout.png) |
+| Home Screen | Menu | Cart | Checkout | Order Confirmation | Profile |
+|-------------|------|------|----------|----------------------|---------|
+| ![Home](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/home.png) | ![Menu](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/menu.png) | ![Cart](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/cart.png) | ![Checkout](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/checkout.png) | ![Order Confirmation](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/order_confirmation.png) | ![Profile](https://raw.githubusercontent.com/taran-bansal/food_delivery_app/refs/heads/main/assets/screenshots/profile.png) |
 
 ## 🧪 Testing
 
