@@ -186,6 +186,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   Widget _buildScaffold() {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: _buildAppBar(),
           body: CustomScrollView(
             slivers: [

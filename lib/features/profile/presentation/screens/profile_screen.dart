@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/core/theme/app_theme.dart';
 
-// Make sure this matches your app's primary color
-const Color _primaryColor = Color(0xFF4CAF50); // Default green color, replace with your app's primary color
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

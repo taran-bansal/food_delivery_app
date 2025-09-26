@@ -79,6 +79,7 @@ class CartScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('My Cart'),
           centerTitle: true,
