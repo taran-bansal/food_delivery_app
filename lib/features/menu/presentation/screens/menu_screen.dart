@@ -108,34 +108,57 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        // Handle back button press
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+          return false;
+        }
+        return true;
+      },
+      child: _buildMainContent(context),
+    );
+  }
+
+  Widget _buildMainContent(BuildContext context) {
     if (_hasError) {
-      return Scaffold(
-        appBar: _buildAppBar(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, color: Colors.red, size: 60),
-              const SizedBox(height: 20),
-              const Text('Failed to load menu. Please try again.'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _hasError = false;
-                    _isLoading = true;
-                  });
-                  Future.delayed(const Duration(seconds: 1), () {
-                    if (mounted) {
-                      setState(() {
-                        _isLoading = false;
-                      });
-                    }
-                  });
-                },
-                child: const Text('Retry'),
-              ),
-            ],
+      return WillPopScope(
+        onWillPop: () async {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+            return false;
+          }
+          return true;
+        },
+        child: Scaffold(
+          appBar: _buildAppBar(),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, color: Colors.red, size: 60),
+                const SizedBox(height: 20),
+                const Text('Failed to load menu. Please try again.'),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _hasError = false;
+                      _isLoading = true;
+                    });
+                    Future.delayed(const Duration(seconds: 1), () {
+                      if (mounted) {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    });
+                  },
+                  child: const Text('Retry'),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -149,7 +172,16 @@ class _MenuScreenState extends State<MenuScreen> {
       );
     }
 
-    return _buildScaffold();
+    return WillPopScope(
+      onWillPop: () async {
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+          return false;
+        }
+        return true;
+      },
+      child: _buildScaffold(),
+    );
   }
 
   Widget _buildScaffold() {
@@ -163,7 +195,7 @@ class _MenuScreenState extends State<MenuScreen> {
             pinned: true,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => context.go('/'),
             ),
             automaticallyImplyLeading: false,
             flexibleSpace: FlexibleSpaceBar(
@@ -527,6 +559,8 @@ class _MenuScreenState extends State<MenuScreen> {
           onPressed: () => context.go('/cart'),
           label: Text('View Cart ($itemCount)'),
           icon: const Icon(Icons.shopping_cart),
+          backgroundColor: AppTheme.primaryColor,
+          foregroundColor: Colors.white,
         );
       },
     );

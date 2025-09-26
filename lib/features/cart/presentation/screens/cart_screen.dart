@@ -67,14 +67,25 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Cart'),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () => context.pop(),
-        ),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            context.go('/');
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('My Cart'),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            onPressed: () => context.go('/menu'),
+          ),
       ),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
@@ -113,7 +124,7 @@ class CartScreen extends StatelessWidget {
           );
         },
       ),
-    );
+    ),);
   }
 
   Widget _buildCartItem(BuildContext context, CartItem item) {
