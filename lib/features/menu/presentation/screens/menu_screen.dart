@@ -149,10 +149,7 @@ class _MenuScreenState extends State<MenuScreen> {
       );
     }
 
-    return BlocProvider(
-      create: (context) => CartBloc(),
-      child: _buildScaffold(),
-    );
+    return _buildScaffold();
   }
 
   Widget _buildScaffold() {
@@ -479,7 +476,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                           context.read<CartBloc>().add(AddToCart(CartItem(
                                             id: '${menuItems[index]['name']}_$index',
                                             name: menuItems[index]['name'] as String,
-                                            price: double.parse((menuItems[index]['price'] as String).replaceAll(r'\$', '')),
+                                            price: double.parse((menuItems[index]['price'] as String).replaceAll(RegExp(r'[^0-9.]'), '')),
                                             image: menuItems[index]['image'] as String,
                                           )));
                                         },
@@ -527,7 +524,7 @@ class _MenuScreenState extends State<MenuScreen> {
         final itemCount = state.items.fold<int>(0, (sum, item) => sum + item.quantity);
         
         return FloatingActionButton.extended(
-          onPressed: () => _showCartBottomSheet(context),
+          onPressed: () => context.go('/cart'),
           label: Text('View Cart ($itemCount)'),
           icon: const Icon(Icons.shopping_cart),
         );

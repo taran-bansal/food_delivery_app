@@ -6,6 +6,7 @@ import 'package:food_delivery/features/dashboard/presentation/screens/dashboard_
 import 'package:food_delivery/features/menu/presentation/screens/menu_screen.dart';
 import 'package:food_delivery/features/checkout/presentation/screens/checkout_screen.dart';
 import 'package:food_delivery/features/checkout/presentation/screens/order_confirmation_screen.dart';
+import 'package:food_delivery/features/cart/presentation/screens/cart_screen.dart';
 import 'package:go_router/go_router.dart';
 
 void main() async {
@@ -18,6 +19,9 @@ void main() async {
 
 class FoodDeliveryApp extends StatelessWidget {
   FoodDeliveryApp({super.key});
+
+  // Create a single instance of CartBloc
+  final cartBloc = cart_bloc.CartBloc();
 
   // Define your routes here
   final GoRouter _router = GoRouter(
@@ -76,6 +80,15 @@ class FoodDeliveryApp extends StatelessWidget {
           ),
         ),
       ),
+      
+      // Cart screen
+      GoRoute(
+        path: '/cart',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: const CartScreen(),
+        ),
+      ),
     ],
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(
@@ -108,9 +121,8 @@ class FoodDeliveryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set up screen util for responsive design
     return ScreenUtilInit(
-      designSize: const Size(375, 812), // iPhone 13 mini dimensions
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -130,5 +142,3 @@ class FoodDeliveryApp extends StatelessWidget {
     );
   }
 }
-
-// Main app widget with routing and theme configuration
